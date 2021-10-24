@@ -36,7 +36,7 @@ void loop() {
 void expandColors() {
   uint32_t i = 0;
 
-  while (i <= MIDDLE_PIXEL) {
+  while (i < MIDDLE_PIXEL) {
     uint32_t prev = MIDDLE_PIXEL - i;
     uint32_t next = MIDDLE_PIXEL + i;
 
@@ -54,7 +54,9 @@ void expandColors() {
 }
 
 void shrinkColors() {
-  for (int i = 0; i <= NUM_LEDS / 2; i++) {
+  uint32_t i = 0;
+
+  while (i < MIDDLE_PIXEL) {
     uint32_t empty = strip.Color(0, 0, 0);
 
     strip.setPixelColor(i, empty);
@@ -63,5 +65,7 @@ void shrinkColors() {
     strip.show();
 
     delay(DELAY);
+    i++;
   }
+  
 }
