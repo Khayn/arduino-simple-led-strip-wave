@@ -4,6 +4,8 @@
 #define NUM_LEDS 60
 #define BRIGHTNESS 52
 
+#define MIDDLE_PIXEL NUM_LEDS/2
+
 #define BASE_COLOR 64
 #define COLOR_OFFSET 8
 
@@ -20,24 +22,23 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  uint32_t middlePixel = NUM_LEDS / 2;
   uint32_t startingColor = strip.Color(BASE_COLOR, BASE_COLOR, BASE_COLOR);
 
-  strip.setPixelColor(middlePixel, startingColor);
+  strip.setPixelColor(MIDDLE_PIXEL, startingColor);
   strip.show();
 
-  expandColors(middlePixel);
+  expandColors();
   shrinkColors();
 
 }
 
 
-void expandColors(uint32_t middlePixel ) {
+void expandColors() {
   uint32_t i = 0;
 
-  while (i <= middlePixel) {
-    uint32_t prev = middlePixel - i;
-    uint32_t next = middlePixel + i;
+  while (i <= MIDDLE_PIXEL) {
+    uint32_t prev = MIDDLE_PIXEL - i;
+    uint32_t next = MIDDLE_PIXEL + i;
 
     uint32_t color = strip.Color(BASE_COLOR + i * COLOR_OFFSET, BASE_COLOR, BASE_COLOR);
 
@@ -50,7 +51,6 @@ void expandColors(uint32_t middlePixel ) {
     i++;
   }
 
-  //strip.clear();
 }
 
 void shrinkColors() {
